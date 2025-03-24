@@ -150,18 +150,29 @@ if __name__ == "__main__":
     # Test senaryoları
     print("\n=== Test Senaryoları ===")
     
-    # Senaryo 1: AŞTİ'den OSB'ye
+# Senaryo 1: AŞTİ'den OSB'ye
 print("\n1. AŞTİ'den OSB'ye:")
 rota, aktarma_yerleri = metro.en_az_aktarma_bul("M1", "K4")
 if rota:
     print("En az aktarmalı rota:", " -> ".join(i.ad for i in rota))
     print("Aktarmalar:")
     for aktarma in aktarma_yerleri:
+        # Aktarma yerlerini yazdırmak için doğru unpack yapıyoruz
         print(f"{aktarma[0]} ({aktarma[1]}) -> {aktarma[2]} ({aktarma[3]})")
 
-sonuc = metro.en_hizli_rota_bul("M1", "K4")
-if sonuc:
-    rota, sure, aktarma_yerleri = sonuc
+# Senaryo 2: Batıkent'ten Keçiören'e
+print("\n2. Batıkent'ten Keçiören'e:")
+rota, sure, aktarma_yerleri = metro.en_hizli_rota_bul("T1", "T4")  # sureyi ve aktarmaları almak için unpack et
+if rota:
+    print(f"En hızlı rota ({sure} dakika):", " -> ".join(i.ad for i in rota))
+    print("Aktarmalar:")
+    for aktarma in aktarma_yerleri:
+        print(f"{aktarma[0]} ({aktarma[1]}) -> {aktarma[2]} ({aktarma[3]})")
+
+# Senaryo 3: Keçiören'den AŞTİ'ye
+print("\n3. Keçiören'den AŞTİ'ye:")
+rota, sure, aktarma_yerleri = metro.en_hizli_rota_bul("T4", "M1")  # sureyi ve aktarmaları almak için unpack et
+if rota:
     print(f"En hızlı rota ({sure} dakika):", " -> ".join(i.ad for i in rota))
     print("Aktarmalar:")
     for aktarma in aktarma_yerleri:
